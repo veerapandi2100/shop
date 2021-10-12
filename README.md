@@ -2,7 +2,7 @@
 
 About The Project
 
-Using JWT, Bcrypt, Sequalize, Winston (log), nodemon packages.
+Using JWT, Bcrypt, Sequalize, Winston (log), nodemon, joi packages.
 
 **Simple Api to create a purchase details portal based on the customer.**
 
@@ -18,7 +18,7 @@ API Coverted like
 
 4. Create an API to create order, update order, cancel order.
 
-5. Create an api to list ordered products based on the customer. (Should include search and sort functionality)
+5. Create an api to list ordered products based on the customer. (include search and sort functionality)
 
 6. Api to list ordered product count based on date.
 
