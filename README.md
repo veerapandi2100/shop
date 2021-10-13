@@ -68,6 +68,13 @@ http://localhost:3000/product/create
 	
 }
 
+**GET METHOD**
+
+http://localhost:3000/product/product_list?limit=1?offset=1
+
+http://localhost:3000/product/get_product?productId=11
+
+**POST METHOD**
 
 http://localhost:3000/order/create
 
