@@ -54,6 +54,8 @@ http://localhost:3000/customer/login
 
 You get a token after Give **Authorization for Bearer token** for bellow API
 
+product create and update
+
 http://localhost:3000/product/create
 
 {
