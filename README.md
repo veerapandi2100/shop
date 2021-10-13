@@ -86,13 +86,11 @@ http://localhost:3000/list/order_list?sort=0?search=""?limit=2?offset=0
 http://localhost:3000/order/update_cancel
 
 {
-
-           "orderId": 1
-	   "productId": 1,
-	   "productQuantity": 1,
-	   "address": "no.4, jothi nagar, north street, chennai",
-           "orderStatus": 1                    // 1--->sumbit 2-->cancel
-	   
+    "orderId": 1,
+    "productId": 1,
+    "productQuantity": 1,
+    "address": "no.4, jothi nagar, north street, chennai",
+    "orderStatus": 1                   // 0-submit, 1-inProgress, 2-cancel, 3-success
 }
 
 GET METHOD
