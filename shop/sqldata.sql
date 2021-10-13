@@ -85,7 +85,8 @@ CREATE TABLE `products` (
   `product_quantity` int(11) NOT NULL,
   `product_price` float NOT NULL,
   `createdAt` date DEFAULT NULL,
-  `updatedAt` date DEFAULT NULL
+  `updatedAt` date DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
