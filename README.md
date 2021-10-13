@@ -26,7 +26,7 @@ API Coverted like
 
 setp 1: give the database credentials **config/database.js**
 
-setp 2: give the command ** npm install**
+setp 2: give the command **npm install**
 
 stpe 3: give the command **node index** or nodemon start serve
 
@@ -52,7 +52,7 @@ http://localhost:3000/customer/login
 	"password":"welcome"
 }
 
-You get a token after Give **Authorization for Bearer token ** for bellow API
+You get a token after Give **Authorization for Bearer token** for bellow API
 
 http://localhost:3000/product/create
 
@@ -84,9 +84,10 @@ http://localhost:3000/list/order_list?sort=0?search=""?limit=2?offset=0
 **POST METHOD**
 
 http://localhost:3000/order/update_cancel
+
 {
 
-          "orderId": 1
+           "orderId": 1
 	   "productId": 1,
 	   "productQuantity": 1,
 	   "address": "no.4, jothi nagar, north street, chennai",
