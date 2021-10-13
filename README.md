@@ -35,6 +35,7 @@ The Project will running
 **API Collections below sample json format**
 
 **POST METHOD**
+
 http://localhost:3000/customer/register
 
 {
@@ -56,32 +57,41 @@ You get a token after Give **Authorization for Bearer token ** for bellow API
 http://localhost:3000/product/create
 
 {
+
 	"productName": "dell",
 	"productQuantity": 100,
 	"productUniqueCode": "M01",
 	"productPrice": 15000,
 	"productImage": ""            // Optional param
+	
 }
+
 
 http://localhost:3000/order/create
 
 {
+
 	"productId": 1,
 	"productQuantity": 1,
 	"address": "no.4, jothi nagar, north street, chennai"
+	
 }
 
 **GET METHOD**
+
 http://localhost:3000/list/order_list?sort=0?search=""?limit=2?offset=0
 
 **POST METHOD**
+
 http://localhost:3000/order/update_cancel
 {
-        "orderId": 1
+
+          "orderId": 1
 	   "productId": 1,
 	   "productQuantity": 1,
 	   "address": "no.4, jothi nagar, north street, chennai",
-        "orderStatus": 1                    // 1--->sumbit 2-->cancel
+           "orderStatus": 1                    // 1--->sumbit 2-->cancel
+	   
 }
 
 GET METHOD
