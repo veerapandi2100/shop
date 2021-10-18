@@ -54,6 +54,17 @@ http://localhost:3000/customer/login
 
 You get a token after Give **Authorization for Bearer token** for bellow API
 
+
+Product create & update via file upload
+
+POST Method
+
+http://localhost:3000/product/upload_product
+
+File name: avatar
+
+Sample File Format you can download: https://docs.google.com/spreadsheets/d/138qls2z8ozJru3C2Xf7zHmThIIDR8lnfXNxATD6T9ZI/edit?usp=sharing
+
 product create and update
 
 http://localhost:3000/product/create
