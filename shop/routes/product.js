@@ -126,5 +126,83 @@ router.get('/get_product', (req, res) => {
     });      
 });
 
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+      console.log(file.originalname);
+      cb(null, Date.now()+ '_'+ file.originalname);
+    },
+  });
+  var uploadFile = multer({ storage: storage })
+
+router.post('/upload_product', uploadFile.single('avatar'), function (req, res) {
+    try {
+    console.log(req.file);
+    //
+    console.log('File===>', __dirname, req.file.filename);
+    //
+    const filePath = 'uploads/'+ req.file.filename;
+    console.log('File===>',filePath);
+    const fileName = req.file.filename.split('.').pop();
+    const re = /(\.csv|\.xlsx)$/i;
+    if (!re.exec(req.file.filename)) {
+        // console.log(fileName);
+        logger.error('File extension not supported!');
+        return res.status(503).send({status: 0, message: 'Please upload csv or xlsx file only'});
+    } 
+async.parallel({
+    one: function(callback) {
+         var csvData=[];
+            fs.createReadStream(req.file.path)
+                    .pipe(parse({delimiter: ':'}))
+                    .on('data', function(csvrow) {
+                            csvData.push(csvrow);        
+                    })
+                    .on('end',function() {
+                    // console.log(csvData);
+                    const returncsvData = (fileName == 'csv') ? csvData : undefined;
+                       callback(null, returncsvData);
+                    });
+    },
+    two: function(callback) {
+        var xlsxData=[];
+            var workbook = XLSX.readFile(filePath);
+            var sheet_name_list = workbook.SheetNames;
+            var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+            const returncsvData = (fileName == 'xlsx') ? xlData : undefined;
+        callback(null, returncsvData);
+    }
+}, function(err, results) {
+    // results now equals to: results.one: 'abc\n', results.two: 'xyz\n'
+    //console.log(results.one,'=====>', results.two);
+    const resultData = (results.one) ? results.one : results.two; 
+   // console.log('lppp', resultData[0]['Product Name'])
+
+    const dataArray = [];
+    for(let i=0; i < resultData.length; i ++){        
+       // console.log('lppp', resultData[i]['Product Name']);
+        let list = {};
+        list.product_name = resultData[i]['Product Name'];
+        list.product_quantity = resultData[i]['Product Quantity'];
+        list.product_price = resultData[i]['Product Price'];
+        list.product_unicode = resultData[i]['Product Unicode'];
+        dataArray.push(list);
+    }
+
+    productdata.bulkCreate(dataArray, 
+        {
+            fields:["product_id","product_name", "product_quantity", "product_price", "product_unicode"] ,
+            updateOnDuplicate: ['product_name', 'product_quantity', 'product_price']
+        }).then((data) => {
+            logger.info("Product uploaded successfully"); 
+            return res.status(200).send({status: 1, message: "Product uploaded successfully", data: data});  
+    });
+  });
+}catch (e){
+    logger.error('Error occur', e);
+}
+});
 
 module.exports = router;
